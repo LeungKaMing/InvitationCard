@@ -27,30 +27,6 @@ module.exports = (options = {}) => ({
         use: ['vue-loader']
       },
       {
-        test: /\.ts$/,
-        exclude: /node_modules/,
-        enforce: 'pre',
-        loader: 'tslint-loader'
-      },
-      {
-        test: /\.tsx?$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/,
-        options: {
-          appendTsSuffixTo: [/\.vue$/],
-        }
-      },
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: ["babel-loader",
-          {
-            loader: "ts-loader",
-            options: { appendTsxSuffixTo: [/\.vue$/] }
-          }
-        ]
-      },
-      {
         test: /\.js$/,
         use: ['babel-loader'],
         exclude: /node_modules/
@@ -113,6 +89,6 @@ module.exports = (options = {}) => ({
     alias: {
       '~': resolve(__dirname, 'src')
     },
-    extensions: ['.ts', '.js', '.vue', '.json', '.css']
+    extensions: ['.js', '.vue', '.json', '.css']
   },
 })
