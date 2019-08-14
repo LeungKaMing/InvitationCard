@@ -1,0 +1,121 @@
+.page1, .page2, .page3 {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 24PX;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+.page1 {
+    background: pink;
+    /* z-index: 1; */
+}
+.page2 {
+    background: orange;
+    /* z-index: 2; */
+}
+.page3 {
+    background: orangered;
+    /* z-index: 3; */
+}
+
+/* 首尾页对应只有up / down动画 */
+.page1--up {
+    animation-name: page1fadeIn;
+}
+.page3--down {
+    animation-name: page3fadeOut;
+}
+.page2--up {
+    animation-name: page2fadeIn;
+}
+.page2--down {
+    animation-name: page2fadeOut;
+}
+
+
+@keyframes page1fadeIn {
+    0% {
+        transform: translateY(70%);
+    }
+    20% {
+        /* transform: translateY(0); */
+    }
+    40% {
+        /* transform: translateY(0); */
+    }
+    60% {
+        /* transform: translateY(0); */
+    }
+    80% {
+        /* transform: scale(0.5) translateY(-70%);  */
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+@keyframes page3fadeOut {
+    0% {
+        transform: translateY(-70%);
+    }
+    20% {
+        /* transform: translateY(0); */
+    }
+    40% {
+        /* transform: translateY(0); */
+    }
+    60% {
+        /* transform: translateY(0); */
+    }
+    80% {
+        /* transform: scale(0.5) translateY(-70%);  */
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+@keyframes page2fadeIn {
+    0% {
+        transform: translateY(70%);
+    }
+    20% {
+        /* transform: translateY(0); */
+    }
+    40% {
+        /* transform: translateY(0); */
+    }
+    60% {
+        /* transform: translateY(0); */
+    }
+    80% {
+        /* transform: scale(0.5) translateY(-70%);  */
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+@keyframes page2fadeOut {
+    0% {
+        transform: translateY(-70%);
+    }
+    20% {
+        /* transform: translateY(0); */
+    }
+    40% {
+        /* transform: translateY(0); */
+    }
+    60% {
+        /* transform: translateY(0); */
+    }
+    80% {
+        /* transform: scale(0.5) translateY(-70%);  */
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
