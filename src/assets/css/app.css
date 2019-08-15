@@ -1,4 +1,4 @@
-.page1, .page2, .page3 {
+.page1, .page2, .page3, .page4 {
     width: 100%;
     height: 100%;
     text-align: center;
@@ -11,111 +11,34 @@
     animation-duration: 1s;
     animation-fill-mode: forwards;
 }
+/* 默认样式 */
 .page1 {
     background: pink;
-    /* z-index: 1; */
 }
 .page2 {
     background: orange;
-    /* z-index: 2; */
 }
 .page3 {
     background: orangered;
-    /* z-index: 3; */
+}
+.page4 {
+    background: yellowgreen;
 }
 
-/* 首尾页对应只有up / down动画 */
-.page1--up {
-    animation-name: page1fadeIn;
-}
-.page3--down {
-    animation-name: page3fadeOut;
-}
-.page2--up {
-    animation-name: page2fadeIn;
-}
-.page2--down {
-    animation-name: page2fadeOut;
-}
-
-
-@keyframes page1fadeIn {
+.bounce-enter-active {
+    animation: bounce-in .5s;
+  }
+  .bounce-leave-active {
+    animation: bounce-in .5s reverse;
+  }
+  @keyframes bounce-in {
     0% {
-        transform: translateY(70%);
+      transform: scale(0);
     }
-    20% {
-        /* transform: translateY(0); */
-    }
-    40% {
-        /* transform: translateY(0); */
-    }
-    60% {
-        /* transform: translateY(0); */
-    }
-    80% {
-        /* transform: scale(0.5) translateY(-70%);  */
+    50% {
+      transform: scale(1.5);
     }
     100% {
-        transform: translateY(0) scale(1);
+      transform: scale(1);
     }
-}
-@keyframes page3fadeOut {
-    0% {
-        transform: translateY(-70%);
-    }
-    20% {
-        /* transform: translateY(0); */
-    }
-    40% {
-        /* transform: translateY(0); */
-    }
-    60% {
-        /* transform: translateY(0); */
-    }
-    80% {
-        /* transform: scale(0.5) translateY(-70%);  */
-    }
-    100% {
-        transform: translateY(0) scale(1);
-    }
-}
-@keyframes page2fadeIn {
-    0% {
-        transform: translateY(70%);
-    }
-    20% {
-        /* transform: translateY(0); */
-    }
-    40% {
-        /* transform: translateY(0); */
-    }
-    60% {
-        /* transform: translateY(0); */
-    }
-    80% {
-        /* transform: scale(0.5) translateY(-70%);  */
-    }
-    100% {
-        transform: translateY(0) scale(1);
-    }
-}
-@keyframes page2fadeOut {
-    0% {
-        transform: translateY(-70%);
-    }
-    20% {
-        /* transform: translateY(0); */
-    }
-    40% {
-        /* transform: translateY(0); */
-    }
-    60% {
-        /* transform: translateY(0); */
-    }
-    80% {
-        /* transform: scale(0.5) translateY(-70%);  */
-    }
-    100% {
-        transform: translateY(0) scale(1);
-    }
-}
+  }

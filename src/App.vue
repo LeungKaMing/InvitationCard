@@ -1,18 +1,36 @@
 <template>
   <div>
-    <div v-if="showPage1" :class="['page1', direct === 'up' ? 'page1--up' : direct === 'down' ? 'page1--down' : '' ]" @touchstart="hanldeTouchStart($event, 1)" @touchmove="hanldeTouchMove" @touchend="hanldeTouchEnd">1{{direct}}</div>
-    <div v-if="showPage2" :class="['page2', direct === 'up' ? 'page2--up' : direct === 'down' ? 'page2--down' : '' ]" @touchstart="hanldeTouchStart($event, 2)" @touchmove="hanldeTouchMove" @touchend="hanldeTouchEnd">2{{direct}}</div>
-    <div v-if="showPage3" :class="['page3', direct === 'up' ? 'page3--up' : direct === 'down' ? 'page3--down' : '' ]" @touchstart="hanldeTouchStart($event, 3)" @touchmove="hanldeTouchMove" @touchend="hanldeTouchEnd">3{{direct}}</div>
+    <transition name="bounce">
+      <div v-if="showPage1" :class="['page1']" @touchstart="hanldeTouchStart($event, 1)" @touchmove="hanldeTouchMove" @touchend="hanldeTouchEnd">
+        <Map />
+      </div>
+    </transition>
+    
+    <transition name="bounce">
+      <div v-if="showPage2" :class="['page2']" @touchstart="hanldeTouchStart($event, 2)" @touchmove="hanldeTouchMove" @touchend="hanldeTouchEnd">所处页面：{{currentPage}} 所处方向：{{direct}}</div>
+    </transition>
+
+    <transition name="bounce">
+      <div v-if="showPage3" :class="['page3']" @touchstart="hanldeTouchStart($event, 3)" @touchmove="hanldeTouchMove" @touchend="hanldeTouchEnd">所处页面：{{currentPage}} 所处方向：{{direct}}</div>
+    </transition>
+
+    <transition name="bounce">
+      <div v-if="showPage4" :class="['page4']" @touchstart="hanldeTouchStart($event, 4)" @touchmove="hanldeTouchMove" @touchend="hanldeTouchEnd">所处页面：{{currentPage}} 所处方向：{{direct}}</div>
+    </transition>
+
   </div>
 </template>
 
 <script>
   import './assets/css/app.css'
-
+  import Map from './components/Map'
   export default {
+    components: {
+      Map
+    },
     data() {
       return {
-        prevPage: 0,
+        prevPage: 1,
         currentPage: 1,
         nextPage: 0,
         startPageY: 0,
@@ -20,6 +38,7 @@
         showPage1: true,
         showPage2: false,
         showPage3: false,
+        showPage4: false,
         swithTouch: false
       }
     },
@@ -46,31 +65,32 @@
         if (Math.abs(this.$data.endPageY - this.$data.startPageY) < 100) {
           return ''
         } else {
-          let direct = this.$data.endPageY - this.$data.startPageY < 0 ? 'up' : 'down'
+          const direct = this.$data.endPageY - this.$data.startPageY < 0 ? 'up' : 'down'
           // ------------换页，所有当前页用到的变量初始化 start------------
           this.$data.startPageY = 0 // 当前用到的起点
           this.$data.endPageY = 0 // 当前用到的终点
           this.$data.swithTouch = false // 每次换页都要把这个总开关归零
+          
           // 首页不能上滑，尾页不能下滑 有问题的条件先过滤
-          if (this.$data.currentPage === 1 && direct === 'up') {
-            direct = ''
-          } else if (this.$data.currentPage === 3 && direct === 'down') {
-            direct = ''
-          } else {
-            // 其他页
-
-
-
-
-            this.$data.currentPage !== 1 && direct === 'up' ? this[`showPage${this.$data.currentPage - 1}`] = true : this.$data.currentPage !== 3 && direct === 'down' ? this[`showPage${this.$data.currentPage + 1}`] = true : ''  // 针对当前方向去对对应方向的页面做打开 对于处于其他页的情况 ok
-            this[`showPage${this.$data.currentPage}`] = true // 当前页面跳去另外的页面肯定是要关闭的，除了首页和尾页 ok
-            
-            this.$data.prevPage = this.$data.currentPage  // 当前页成为上一次页面
-            this.$data.currentPage = direct === 'up' ? this.$data.currentPage - 1 : this.$data.currentPage + 1  // 根据滑动方向展示对应的页面
-
-
-
+          if (this.$data.currentPage === 1 && direct === 'down') {
+            // 头
+            this[`showPage${this.$data.currentPage}`] = true
+            this[`showPage${this.$data.currentPage + 1}`] = true
+          } else if (this.$data.currentPage === 4 && direct === 'up') {
+            // 尾
+            this[`showPage${this.$data.currentPage}`] = false
+            this[`showPage${this.$data.currentPage - 1}`] = true
+          } else if (this.$data.currentPage !== 4 && direct === 'down') {
+            this[`showPage${this.$data.currentPage}`] = true
+            this[`showPage${this.$data.currentPage + 1}`] = true
+          } else if (this.$data.currentPage !== 1 && direct === 'up') {
+            this[`showPage${this.$data.currentPage}`] = false
+            this[`showPage${this.$data.currentPage - 1}`] = true
           }
+          
+          this.$data.prevPage = this.$data.currentPage  // 当前页成为上一次页面
+          
+          // this.$data.currentPage = direct === 'up' && this.$data.currentPage !== 1 ? this.$data.currentPage - 1 : direct === 'down' && this.$data.currentPage !== 3 ? this.$data.currentPage + 1 :  this.$data.currentPage // 根据滑动方向展示对应的页面 ok
           return direct
         }
       }
