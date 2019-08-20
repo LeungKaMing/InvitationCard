@@ -1,32 +1,39 @@
 <template>
   <div>
     <transition name="bounce">
-      <div v-if="showPage1" :class="['page1']" @touchstart="hanldeTouchStart($event, 1)" @touchmove="hanldeTouchMove" @touchend="hanldeTouchEnd">
+      <div v-if="showPage1" :class="['page1']" :data-role="direct" @touchstart="hanldeTouchStart($event, 1)" @touchmove="hanldeTouchMove" @touchend="hanldeTouchEnd">
         <Map />
       </div>
     </transition>
     
     <transition name="bounce">
-      <div v-if="showPage2" :class="['page2']" @touchstart="hanldeTouchStart($event, 2)" @touchmove="hanldeTouchMove" @touchend="hanldeTouchEnd">所处页面：{{currentPage}} 所处方向：{{direct}}</div>
+      <div v-if="showPage2" :class="['page2']" :data-role="direct" @touchstart="hanldeTouchStart($event, 2)" @touchmove="hanldeTouchMove" @touchend="hanldeTouchEnd">
+        <video-comp />
+      </div>
     </transition>
 
     <transition name="bounce">
-      <div v-if="showPage3" :class="['page3']" @touchstart="hanldeTouchStart($event, 3)" @touchmove="hanldeTouchMove" @touchend="hanldeTouchEnd">所处页面：{{currentPage}} 所处方向：{{direct}}</div>
+      <div v-if="showPage3" :class="['page3']" :data-role="direct" @touchstart="hanldeTouchStart($event, 3)" @touchmove="hanldeTouchMove" @touchend="hanldeTouchEnd"></div>
     </transition>
 
     <transition name="bounce">
-      <div v-if="showPage4" :class="['page4']" @touchstart="hanldeTouchStart($event, 4)" @touchmove="hanldeTouchMove" @touchend="hanldeTouchEnd">所处页面：{{currentPage}} 所处方向：{{direct}}</div>
+      <div v-if="showPage4" :class="['page4']" :data-role="direct" @touchstart="hanldeTouchStart($event, 4)" @touchmove="hanldeTouchMove" @touchend="hanldeTouchEnd"></div>
     </transition>
-
+    <Tri :direct="direct" :currentPage="currentPage" />
   </div>
 </template>
 
 <script>
   import './assets/css/app.css'
   import Map from './components/Map'
+  import Tri from './components/Tri'
+  import VideoComp from './components/Video'
+
   export default {
     components: {
-      Map
+      Map,
+      Tri,
+      VideoComp
     },
     data() {
       return {
@@ -39,7 +46,7 @@
         showPage2: false,
         showPage3: false,
         showPage4: false,
-        swithTouch: false
+        swithTouch: false,
       }
     },
     computed: {

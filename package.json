@@ -21,6 +21,7 @@
     "vue": "^2.5.16",
     "vue-baidu-map": "^0.21.22",
     "vue-router": "^3.0.2",
+    "vue-video-player": "^5.0.2",
     "vuedraggable": "^2.17.0",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3",
