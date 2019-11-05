@@ -11,7 +11,7 @@
     "axios": "^0.18.0",
     "cross-env": "^5.2.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "mongoose": "^5.4.3",
+    "mongoose": "^5.7.5",
     "nanoid": "^2.0.0",
     "query-string": "^6.2.0",
     "react": "^16.7.0",
